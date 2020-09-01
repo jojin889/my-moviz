@@ -18,7 +18,7 @@
     },
     "scripts": {
       "frontend": "cd front && npm start",
-      "backend": "cd back && npx nodemon app.js",
+      "backend": "cd back && npx nodemon",
       "dev": "concurrently --kill-others-on-fail \"npm run back\" \"npm run front\"",
       "heroku-postbuild": "cd front && npm install && npm run build",
       "start": "react-scripts start",
