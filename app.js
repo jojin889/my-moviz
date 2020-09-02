@@ -16,7 +16,7 @@ var app = express();
 
 
 // Serve static files from the React app
-app.use(express.static(__dirname, 'dist', {index: false}));
+app.use(express.static(path.join(__dirname, 'front/build')));
 
 
 // --> https://www.npmjs.com/package/cors#installation
@@ -32,6 +32,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -57,7 +58,7 @@ app.use(function(err, req, res, next) {
 
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'index.html'));
+  res.sendFile(path.join(__dirname+'/front/build/index.html'));
 })
 
 
