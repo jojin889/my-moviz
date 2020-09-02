@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 var options = {
    connectTimeoutMS: 5000,
    useNewUrlParser: true,
+   useUnifiedTopology: true,
   };
 
 mongoose.connect('mongodb+srv://jonathan:titanium123@cluster0.a2jmj.mongodb.net/mymovizapp?retryWrites=true&w=majority',
