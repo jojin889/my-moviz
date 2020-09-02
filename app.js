@@ -12,11 +12,16 @@ var usersRouter = require('./routes/users');
 var cors = require('cors')
 var app = express();
 
-// Link the backend and the frontend
-
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'front/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+//production mode
+if(process.env.NODE_ENV === 'production') {  app.use(express.static(path.join(__dirname, 'client/build')));  // 
+ app.get('*', (req, res) => {    res.sendfile(path.join(__dirname = 'client/build/index.html'));  })}
+
+ //build mode
+ app.get('*', (req, res) => {  res.sendFile(path.join(__dirname+'/client/public/index.html'));})
 
 
 // --> https://www.npmjs.com/package/cors#installation
@@ -52,14 +57,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-
-
-// AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/front/build/index.html'));
-})
 
 
 //
