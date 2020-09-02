@@ -20,9 +20,6 @@ app.use(cors())
  
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -50,9 +47,13 @@ app.use(function(err, req, res, next) {
 
 
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'front/build')));
+
+
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/front/public/index.html'))
+  res.sendFile(path.join(__dirname+'/front/build/index.html'));
 })
 
 
