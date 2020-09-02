@@ -16,18 +16,9 @@ var app = express();
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-//production mode
-if(process.env.NODE_ENV === 'production') {  app.use(express.static(path.join(__dirname, 'client/build'))); }  //
 
  app.get('*', function (req, res) {
-  const index = path.join(__dirname, 'build', 'index.html');
-  res.sendFile(index);
-});
-
-
- //build mode
- app.get('*', function (req, res) {
-  const index = path.join(__dirname, 'build', 'index.html');
+  const index = path.join(__dirname, 'client/build', 'index.html');
   res.sendFile(index);
 });
 
