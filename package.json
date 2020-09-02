@@ -6,9 +6,6 @@
     "client-install": "npm install --prefix client",
     "start": "node app.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "server": "nodemon index.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "async-request": "^1.2.0",
