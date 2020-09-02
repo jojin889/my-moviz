@@ -16,12 +16,22 @@ var app = express();
 
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'front/build')));
+app.use(express.static(__dirname, 'dist', {index: false}));
 
 
 // --> https://www.npmjs.com/package/cors#installation
 
 app.use(cors())
+ 
+
+// view engine setup
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,7 +54,7 @@ app.use(function(err, req, res, next) {
 
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/front/build/index.html'));
+  res.sendFile(path.join(__dirname+'/front/src/index.html'));
 })
 
 
